@@ -105,3 +105,184 @@ def exibir_menu() -> str:
     while True:
         print('\nEscolha a Opção Desejada:\n')
         print('1 - Cadastrar Contato')
+
+        print('2 - Consultar Contatos')
+        print('3 - Remover Contatos')
+        print('4 - Encerrar Programa')
+        print('_' * 74)
+
+        opcao = input("Digite a Opção: ").strip()
+
+        if not opcao.isdigit():
+            print("Entrada inválida! Digite apenas números (1 a 4).")
+            continue
+
+        if opcao == '1':
+            return cadastrar_contatos
+        elif opcao == '2':
+            return sub_menu_consultar_contatos
+        elif opcao == '3':
+            return remover_contatos
+        elif opcao == '4':
+            print("Encerrando Programa ...")
+            return None
+        else:
+            print("Opção inválida. Tente novamente!")
+
+
+# ---------- CRUD ----------
+def cadastrar_contatos() -> None:
+    while True:
+        print("\n Novo Contato")
+
+        # Nome
+        while True:
+            nome = input("Digite o nome ou 'sair' para cancelar: ").strip()
+            if nome.upper() == "SAIR":
+                return
+            if nome.replace(" ", "").isalpha():
+                break
+            print("Entrada inválida! Digite apenas letras.")
+
+        # Sobrenome
+        while True:
+            sobrenome = input(
+                "Digite o sobrenome ou 'sair' para cancelar: ").strip()
+            if sobrenome.upper() == "SAIR":
+                return
+            if sobrenome.replace(" ", "").isalpha():
+                break
+            print("Entrada inválida! Digite apenas letras.")
+
+        # Telefone
+        while True:
+            telefone = input(
+                "Digite o telefone ou 'sair' para cancelar: ").strip()
+            if telefone.upper() == "SAIR":
+                return
+            if telefone.isdigit() and 8 <= len(telefone) <= 15:
+                break
+            print("Telefone inválido! Entre 8 e 15 dígitos.")
+
+        # Email
+        while True:
+            email = input(
+                "Digite seu e-mail ou 'sair' para cancelar: ").strip()
+            if email.upper() == "SAIR":
+                return
+            if "@" in email and "." in email and " " not in email:
+                break
+            print("E-mail inválido! Digite no formato nome@dominio.com.")
+
+        # Atividade
+        while True:
+            atividade = input(
+                "Digite a atividade ou 'sair' para cancelar: ").strip()
+            if atividade.upper() == "SAIR":
+                return
+            if atividade.replace(" ", "").isalpha():
+                break
+            print("Entrada inválida! Digite apenas letras.")
+
+        # Criar contato
+        contato = {
+            "id": gerar_novo_id(),
+            "nome": nome,
+            "sobrenome": sobrenome,
+            "telefone": telefone,
+            "email": email,
+            "atividade": atividade,
+        }
+
+        listaContatos.append(contato)
+        salvar_contatos()  # salvar ao cadastrar
+
+        print("\nContato cadastrado com sucesso!")
+        exibir_contato(contato)
+
+        continuar = input(
+            "\nDeseja cadastrar outro contato? (s/n): ").strip().lower()
+        if continuar != 's':
+            break
+
+
+def sub_menu_consultar_contatos():
+    print('\nEscolha a Opção Desejada:\n')
+    print('1 - Consultar Todos')
+    print('2 - Consultar por ID')
+    print('3 - Consultar por Atividade')
+    print('4 - Retornar ao Menu')
+
+    consulta = input("Digite 1, 2, 3 ou 4: ").strip()
+
+    if consulta == '1':
+        if not listaContatos:
+            print("\nNenhum contato cadastrado.")
+        else:
+            print("\nLista de Contatos:\n")
+            for contato in listaContatos:
+                exibir_contato(contato)
+
+    elif consulta == '2':
+        id_busca = input("Digite o ID do contato: ").strip()
+        for contato in listaContatos:
+            if contato.get('id') == id_busca:
+                print("\nContato encontrado:")
+                exibir_contato(contato)
+                break
+        else:
+            print("Contato com esse ID não foi encontrado.")
+
+    elif consulta == '3':
+        atividade_busca = input(
+            "Digite a atividade que deseja consultar: ").strip().lower()
+        encontrados = [c for c in listaContatos if c.get(
+            "atividade", "").lower() == atividade_busca]
+
+        if encontrados:
+            print(f"\nContatos com atividade '{atividade_busca}':\n")
+            for contato in encontrados:
+                exibir_contato(contato)
+        else:
+            print("Nenhum contato com essa atividade foi encontrado.")
+
+    elif consulta == '4':
+        print("Retornando ao menu principal...")
+    else:
+        print("Opção inválida. Tente novamente!")
+
+
+def remover_contatos():
+    id_remover = input(
+        "Digite o ID do contato que deseja remover ou sair para sair: ").strip()
+
+    for i, contato in enumerate(listaContatos):
+        if contato.get("id") == id_remover:
+            print("\nContato encontrado:")
+            exibir_contato(contato)
+            if id_remover == 'sair':
+                break
+            confirmacao = input(
+                "Deseja remover este contato? (s/n): ").strip().lower()
+            if confirmacao == 's':
+                del listaContatos[i]
+                salvar_contatos()
+                print("Contato removido com sucesso!")
+            else:
+                print("Remoção cancelada.")
+            break
+    else:
+        print("Contato com esse ID não encontrado.")
+
+
+# ---------- Execução ----------
+if __name__ == "__main__":
+    while True:
+        funcao_escolhida = exibir_menu()
+        if funcao_escolhida is None:
+            break
+        else:
+            try:
+                funcao_escolhida()
+            except Exception as e:
+                print("Ocorreu um erro durante a execução:", e)
