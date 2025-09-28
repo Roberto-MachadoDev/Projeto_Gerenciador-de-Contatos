@@ -261,7 +261,7 @@ def remover_contatos():
         print("Contato com esse ID não encontrado.")
 
 
-# ---------- Execução ----------
+
 if __name__ == "__main__":
     while True:
         funcao_escolhida = exibir_menu()
