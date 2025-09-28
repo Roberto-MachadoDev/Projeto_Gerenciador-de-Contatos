@@ -14,7 +14,9 @@ print('_' * 74)
 print('_' * 30 + ' Menu Principal ' + '_' * 28)
 print('_' * 74)
 
-# ---------- I/O (carregar / salvar) ----------
+#  I/O (carregar / salvar) ----------
+
+
 def salvar_contatos():
     """Salva listaContatos no JSON (variável global listaContatos)."""
     try:
@@ -44,7 +46,8 @@ def carregar_contatos():
     for item in data:
         if not isinstance(item, dict):
             continue
-        normalized = {k.strip().lower(): v for k, v in item.items() if isinstance(k, str)}
+        normalized = {k.strip().lower(): v for k,
+                      v in item.items() if isinstance(k, str)}
         contatos.append({
             "id": str(normalized.get('id', '')),
             "nome": normalized.get('nome', ''),
@@ -67,7 +70,8 @@ def gerar_novo_id():
 # ---------- Carregar contatos ----------
 listaContatos = carregar_contatos()
 
-existing_ids = [int(c['id']) for c in listaContatos if c.get('id') and c['id'].isdigit()]
+existing_ids = [int(c['id'])
+                for c in listaContatos if c.get('id') and c['id'].isdigit()]
 id_global = max(existing_ids) + 1 if existing_ids else 5586954
 
 # Atribui IDs faltantes
@@ -82,12 +86,14 @@ for c in listaContatos:
 if changed:
     salvar_contatos()
 
-<<<<<<< HEAD
+<< << << < HEAD
 # ---------- Funções de exibição ----------
-=======
+== == == =
 
 # Funções de exibição e menu ----------
->>>>>>> d33b613 (Atualizando main.py)
+>>>>>> > d33b613(Atualizando main.py)
+
+
 def exibir_contato(contato):
     """Exibe informações de um contato."""
     print(f"\nID: {contato.get('id', '<sem id>')}")
@@ -127,12 +133,15 @@ def exibir_menu() -> str:
         else:
             print("Opção inválida. Tente novamente!")
 
-<<<<<<< HEAD
+
+<< << << < HEAD
 # ---------- CRUD ----------
-=======
+== == == =
 
 # CRUD
->>>>>>> 98ffd32 (Atualizei main.py com opção de sair em Remover com Id e consultar_cadastro)
+>>>>>> > 98ffd32(Atualizei main.py com opção de sair em Remover com Id e consultar_cadastro)
+
+
 def cadastrar_contatos() -> None:
     """Cadastra novos contatos."""
     while True:
@@ -149,7 +158,8 @@ def cadastrar_contatos() -> None:
 
         # Sobrenome
         while True:
-            sobrenome = input("Digite o sobrenome ou 'sair' para cancelar: ").strip()
+            sobrenome = input(
+                "Digite o sobrenome ou 'sair' para cancelar: ").strip()
             if sobrenome.upper() == "SAIR":
                 return
             if sobrenome.replace(" ", "").isalpha():
@@ -158,7 +168,8 @@ def cadastrar_contatos() -> None:
 
         # Telefone
         while True:
-            telefone = input("Digite o telefone ou 'sair' para cancelar: ").strip()
+            telefone = input(
+                "Digite o telefone ou 'sair' para cancelar: ").strip()
             if telefone.upper() == "SAIR":
                 return
             if telefone.isdigit() and 8 <= len(telefone) <= 15:
@@ -167,7 +178,8 @@ def cadastrar_contatos() -> None:
 
         # Email
         while True:
-            email = input("Digite seu e-mail ou 'sair' para cancelar: ").strip()
+            email = input(
+                "Digite seu e-mail ou 'sair' para cancelar: ").strip()
             if email.upper() == "SAIR":
                 return
             if "@" in email and "." in email and " " not in email:
@@ -176,7 +188,8 @@ def cadastrar_contatos() -> None:
 
         # Atividade
         while True:
-            atividade = input("Digite a atividade ou 'sair' para cancelar: ").strip()
+            atividade = input(
+                "Digite a atividade ou 'sair' para cancelar: ").strip()
             if atividade.upper() == "SAIR":
                 return
             if atividade.replace(" ", "").isalpha():
@@ -199,7 +212,8 @@ def cadastrar_contatos() -> None:
         print("\nContato cadastrado com sucesso!")
         exibir_contato(contato)
 
-        continuar = input("\nDeseja cadastrar outro contato? (s/n): ").strip().lower()
+        continuar = input(
+            "\nDeseja cadastrar outro contato? (s/n): ").strip().lower()
         if continuar != 's':
             break
 
@@ -233,8 +247,10 @@ def sub_menu_consultar_contatos():
             print("Contato com esse ID não foi encontrado.")
 
     elif consulta == '3':
-        atividade_busca = input("Digite a atividade que deseja consultar: ").strip().lower()
-        encontrados = [c for c in listaContatos if c.get("atividade", "").lower() == atividade_busca]
+        atividade_busca = input(
+            "Digite a atividade que deseja consultar: ").strip().lower()
+        encontrados = [c for c in listaContatos if c.get(
+            "atividade", "").lower() == atividade_busca]
 
         if encontrados:
             print(f"\nContatos com atividade '{atividade_busca}':\n")
@@ -251,7 +267,8 @@ def sub_menu_consultar_contatos():
 
 def remover_contatos():
     """Remove contato pelo ID."""
-    id_remover = input("Digite o ID do contato que deseja remover ou 'sair' para sair: ").strip()
+    id_remover = input(
+        "Digite o ID do contato que deseja remover ou 'sair' para sair: ").strip()
     if id_remover.lower() == 'sair':
         return
 
@@ -259,7 +276,8 @@ def remover_contatos():
         if contato.get("id") == id_remover:
             print("\nContato encontrado:")
             exibir_contato(contato)
-            confirmacao = input("Deseja remover este contato? (s/n): ").strip().lower()
+            confirmacao = input(
+                "Deseja remover este contato? (s/n): ").strip().lower()
             if confirmacao == 's':
                 del listaContatos[i]
                 salvar_contatos()
