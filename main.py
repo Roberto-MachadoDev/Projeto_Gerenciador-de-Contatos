@@ -82,7 +82,12 @@ for c in listaContatos:
 if changed:
     salvar_contatos()
 
+<<<<<<< HEAD
 # ---------- Funções de exibição ----------
+=======
+
+# Funções de exibição e menu ----------
+>>>>>>> d33b613 (Atualizando main.py)
 def exibir_contato(contato):
     """Exibe informações de um contato."""
     print(f"\nID: {contato.get('id', '<sem id>')}")
