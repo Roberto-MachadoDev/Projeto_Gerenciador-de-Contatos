@@ -3,7 +3,7 @@
 import json
 import os
 
-# -------- Configurações ----------
+#  Configurações
 PASTA_GDC = os.path.join(os.path.expanduser("~"), "GDC")
 os.makedirs(PASTA_GDC, exist_ok=True)
 ARQUIVO_JSON = os.path.join(PASTA_GDC, "contatos.json")
