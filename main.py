@@ -122,7 +122,12 @@ def exibir_menu() -> str:
         else:
             print("Opção inválida. Tente novamente!")
 
+<<<<<<< HEAD
 # ---------- CRUD ----------
+=======
+
+# CRUD
+>>>>>>> 98ffd32 (Atualizei main.py com opção de sair em Remover com Id e consultar_cadastro)
 def cadastrar_contatos() -> None:
     """Cadastra novos contatos."""
     while True:
@@ -259,7 +264,6 @@ def remover_contatos():
             break
     else:
         print("Contato com esse ID não encontrado.")
-
 
 
 if __name__ == "__main__":
