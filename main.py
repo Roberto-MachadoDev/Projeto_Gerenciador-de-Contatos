@@ -86,13 +86,6 @@ for c in listaContatos:
 if changed:
     salvar_contatos()
 
-<< << << < HEAD
-# ---------- Funções de exibição ----------
-== == == =
-
-# Funções de exibição e menu ----------
->>>>>> > d33b613(Atualizando main.py)
-
 
 def exibir_contato(contato):
     """Exibe informações de um contato."""
@@ -132,14 +125,6 @@ def exibir_menu() -> str:
             return None
         else:
             print("Opção inválida. Tente novamente!")
-
-
-<< << << < HEAD
-# ---------- CRUD ----------
-== == == =
-
-# CRUD
->>>>>> > 98ffd32(Atualizei main.py com opção de sair em Remover com Id e consultar_cadastro)
 
 
 def cadastrar_contatos() -> None:
