@@ -222,9 +222,11 @@ def sub_menu_consultar_contatos():
                 exibir_contato(contato)
 
     elif consulta == '2':
-        id_busca = input("Digite o ID do contato: ").strip()
+        id_busca = input("Digite o ID do contato ou sair para Sair: ").strip()
         for contato in listaContatos:
             if contato.get('id') == id_busca:
+                if id_busca == "Sair":
+                    break
                 print("\nContato encontrado:")
                 exibir_contato(contato)
                 break
