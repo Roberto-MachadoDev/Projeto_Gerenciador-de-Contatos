@@ -1,4 +1,4 @@
-# Programa de Gerenciamento de Contatos Comerciais
+# Programa de Gerenciamento de Contatos Pessoais
 
 import json
 import os
@@ -14,7 +14,7 @@ print('_' * 74)
 print('_' * 30 + ' Menu Principal ' + '_' * 28)
 print('_' * 74)
 
-#  I/O (carregar / salvar) ----------
+#  I/O (carregar / salvar)
 
 
 def salvar_contatos():
@@ -41,7 +41,7 @@ def carregar_contatos():
     if not isinstance(data, list):
         print("Formato inesperado no JSON (esperado lista). Iniciando vazio.")
         return []
-
+# Variavel global para armazenamento em listas covertida ao um Dicionario - dict
     contatos = []
     for item in data:
         if not isinstance(item, dict):
