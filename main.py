@@ -72,7 +72,7 @@ listaContatos = carregar_contatos()
 
 existing_ids = [int(c['id'])
                 for c in listaContatos if c.get('id') and c['id'].isdigit()]
-id_global = max(existing_ids) + 1 if existing_ids else 5586954
+id_global = max(existing_ids) + 1 if existing_ids else 0
 
 # Atribui IDs faltantes
 changed = False
@@ -134,7 +134,7 @@ def cadastrar_contatos() -> None:
 
         # Nome
         while True:
-            nome = input("Digite o nome ou 'sair' para cancelar: ").strip()
+            nome = input("Digite o Nome ou 'SAIR' para cancelar: ").strip()
             if nome.upper() == "SAIR":
                 return
             if nome.replace(" ", "").isalpha():
@@ -144,7 +144,7 @@ def cadastrar_contatos() -> None:
         # Sobrenome
         while True:
             sobrenome = input(
-                "Digite o sobrenome ou 'sair' para cancelar: ").strip()
+                "Digite o Sobrenome ou 'SAIR' para cancelar: ").strip()
             if sobrenome.upper() == "SAIR":
                 return
             if sobrenome.replace(" ", "").isalpha():
@@ -154,7 +154,7 @@ def cadastrar_contatos() -> None:
         # Telefone
         while True:
             telefone = input(
-                "Digite o telefone ou 'sair' para cancelar: ").strip()
+                "Digite o Telefone ou 'SAIR' para cancelar: ").strip()
             if telefone.upper() == "SAIR":
                 return
             if telefone.isdigit() and 8 <= len(telefone) <= 15:
@@ -164,7 +164,7 @@ def cadastrar_contatos() -> None:
         # Email
         while True:
             email = input(
-                "Digite seu e-mail ou 'sair' para cancelar: ").strip()
+                "Digite seu e-mail ou 'SAIR' para cancelar: ").strip()
             if email.upper() == "SAIR":
                 return
             if "@" in email and "." in email and " " not in email:
@@ -174,7 +174,7 @@ def cadastrar_contatos() -> None:
         # Atividade
         while True:
             atividade = input(
-                "Digite a atividade ou 'sair' para cancelar: ").strip()
+                "Digite a Atividade / Profissão ou 'SAIR' para cancelar: ").strip()
             if atividade.upper() == "SAIR":
                 return
             if atividade.replace(" ", "").isalpha():
@@ -235,7 +235,7 @@ def sub_menu_consultar_contatos():
 
     elif consulta == '3':
         atividade_busca = input(
-            "Digite a atividade que deseja consultar: ").strip().lower()
+            "Digite a Atividade que deseja consultar: ").strip().lower()
         encontrados = [c for c in listaContatos if c.get(
             "atividade", "").lower() == atividade_busca]
 
